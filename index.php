@@ -12,23 +12,23 @@
 		),
 		'social_urls' => array(
 			'facebook'  => array(
-				'https://www.facebook.com/destinyrescue', // Hide by setting this to an empty string
+				'https://www.facebook.com/github', // Hide by setting this to an empty string
 				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/facebook.png'
 			),
 			'twitter'   => array(
-				'https://twitter.com/destinyrescue', // Hide by setting this to an empty string
+				'https://twitter.com/github', // Hide by setting this to an empty string
 				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/twitter.png'
 			),
 			'instagram' => array(
-				'http://instagram.com/destiny_rescue', // Hide by setting this to an empty string
+				'http://instagram.com/github', // Hide by setting this to an empty string
 				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/instagram.png'
 			),
 			'vimeo'     => array(
-				'https://vimeo.com/destinyrescue', // Hide by setting this to an empty string
+				'https://vimeo.com/github', // Hide by setting this to an empty string
 				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/vimeo.png'
 			),
 			'linkedin'  => array(
-				'http://www.linkedin.com/company/destiny-rescue', // Hide by setting this to an empty string
+				'http://www.linkedin.com/company/github', // Hide by setting this to an empty string
 				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/linkedin.png'
 			)
 		),
