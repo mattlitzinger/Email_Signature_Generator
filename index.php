@@ -1,74 +1,206 @@
+<?php
+	// Modify the values in $options to fit your company/organization.
+	$options = array(
+		'company_name' => 'GitHub',
+		'company_url'  => 'http://github.com', 
+		'email_domain' => 'gitub.com', 
+		'logo_url'     => 'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/github_logo.png',  // Must be an absolute path
+		'colors'       => array(
+			'primary'   => '#020202', // Name, emal address, phone and address
+			'secondary' => '#bd5f35', // Title/position and company name
+			'tertiary'  => '#b4b4b4'  // Vertical border
+		),
+		'social_urls' => array(
+			'facebook'  => array(
+				'https://www.facebook.com/destinyrescue', // Hide by setting this to an empty string
+				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/facebook.png'
+			),
+			'twitter'   => array(
+				'https://twitter.com/destinyrescue', // Hide by setting this to an empty string
+				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/twitter.png'
+			),
+			'instagram' => array(
+				'http://instagram.com/destiny_rescue', // Hide by setting this to an empty string
+				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/instagram.png'
+			),
+			'vimeo'     => array(
+				'https://vimeo.com/destinyrescue', // Hide by setting this to an empty string
+				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/vimeo.png'
+			),
+			'linkedin'  => array(
+				'http://www.linkedin.com/company/destiny-rescue', // Hide by setting this to an empty string
+				'https://raw.githubusercontent.com/ltzngr/Email_Signature_Generator/master/images/linkedin.png'
+			)
+		),
+		'address_list' => array(
+			array( 'United States', '88 Colin P Kelly Jr St, San Francisco, CA 94107, USA' ),
+			array( 'Australia', 'Homemaker City, Castlereagh Street, Sydney NSW 2000, Australia' ),
+			array( 'Japan', '1-10-５ Akasaka, Minato, Tokyo 107-0052, Japan' ),
+			array( 'United Kingdom', '24 Grosvenor Square, London W1A 2LQ, United Kingdom' )
+		),
+		'hide_address_field' => false,
+		'sample_data' => array(
+			'full_name' => 'Matt Litzinger',
+			'position'  => 'Front-End Web Developer',
+			'email_address'  => 'matt.litzinger@github.com',
+			'phone_number'  => '(000) 000-0000'
+		)
+	);
+?>
+
+<?php if( $_POST['create-signature'] ) : 
+
+	$full_name = $_POST['full-name'];
+	$position = $_POST['position'];
+	$country = $_POST['country'];
+	$address = $_POST['mailing-address'];
+	$email_address = $_POST['email'];
+	$primary_number_prefix = $_POST['primary-number-type'];
+	$secondary_number_prefix = $_POST['secondary-number-type'];
+	$primary_number = $_POST['primary-number'];
+	$secondary_number = $_POST['secondary-number'];
+?>
+
+<!-- EMAIL SIGNATURE OUTPUT -->
+<table style="width:550px; font-size:11px; font-family:Arial; margin:0; padding:0;">
+	<tr>
+		<td style="width:55%; border-right: 4px solid <?php echo $options['colors']['tertiary']; ?>; padding-right: 1.5%;">
+			<table width="100%">
+				<tr>
+					<td>
+						<h2 id="full-name" style="font:bold 16px/18px Arial, sans-serif; letter-spacing:-1px; text-transform:uppercase; color:<?php echo $options['colors']['primary']; ?>; margin:0; padding:0;"><?php echo $full_name; ?></h2>
+						<h3 id="position" style="font:bold 14px/16px Arial, sans-serif; letter-spacing:-1px; text-transform:uppercase; color:<?php echo $options['colors']['secondary']; ?>; margin:0; padding:0;"><?php echo $position; ?></h3>
+						<?php if( !$options['hide_address_field'] ) : ?>
+							<h4 id="location" style="font:normal 11px/14px Arial, sans-serif; color:<?php echo $options['colors']['secondary']; ?>; margin:0; padding:0 0 4px 0;"><?php echo $office_name; ?></h4>
+						<?php endif; ?>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<address id="email-address" style="font: normal 10px/15px Arial, sans-serif; color:<?php echo $options['colors']['primary']; ?>;">
+							<?php
+								if($email_address != ''){
+									$print = 'Email: <a href="mailto:'.$email_address.'@'. $options['email_domain'] .'" target="_blank" style="color:'. $options['colors']['primary'] .'; text-decoration:none;">'.$email_address.'@'. $options['email_domain'] .'</a>';
+									echo $print;
+								}
+							?>
+						</address>
+						<address style="font: normal 10px/15px Arial, sans-serif; color:<?php echo $options['colors']['primary']; ?>;">
+							<?php
+								if($secondary_number != ''){
+									$print = $primary_number_prefix.': '.$primary_number.' | '.$secondary_number_prefix.': '.$secondary_number;
+								}
+								else{
+									$print = $primary_number_prefix.': '.$primary_number;
+								}
+								echo $print;
+							?>
+						</address>
+						<?php if( !$options['hide_address_field'] ) : ?>
+							<address style="font: normal 10px/15px Arial, sans-serif; color:<?php echo $options['colors']['primary']; ?>;">
+								<?php 
+									if($address != ''){
+										echo $address;
+									}
+								?>
+							</address>
+						<?php endif; ?>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td id="logo-container" style="width:45%; padding-left: 1.5%;">
+			<table id="logo" width="100%">
+				<tr>
+					<td>
+						<a style="width:200px; margin:0 auto; display:block;" href="<?php echo $options['company_url']; ?>" target="_blank" title="<?php echo $options['company_name']; ?>">
+							<img src="<?php echo $options['logo_url']; ?>" alt="<?php echo $options['company_name']; ?>" width="200px" />
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center; padding-top: 8px;">
+						<?php if( $options['social_urls']['facebook'][0] != '' ) : ?>
+							<a href="<?php echo $options['social_urls']['facebook'][0]; ?>" target="_blank" title="Facebook" style="text-align: center; display: inline-block; margin: 0px 8px;">
+								<img src="<?php echo $options['social_urls']['facebook'][1]; ?>" alt="Facebook" width="18px" height="18px" />
+							</a>
+						<?php endif; ?>
+						<?php if( $options['social_urls']['twitter'][0] != '' ) : ?>
+							<a href="<?php echo $options['social_urls']['twitter'][0]; ?>" target="_blank" title="Twitter" style="text-align: center; display: inline-block; margin: 0px 8px;">
+								<img src="<?php echo $options['social_urls']['twitter'][1]; ?>" alt="Twitter" width="18px" height="18px" />
+							</a>
+						<?php endif; ?>
+						<?php if( $options['social_urls']['instagram'][0] != '' ) : ?>
+							<a href="<?php echo $options['social_urls']['instagram'][0]; ?>" target="_blank" title="Instagram" style="text-align: center; display: inline-block; margin: 0px 8px;">
+								<img src="<?php echo $options['social_urls']['instagram'][1]; ?>" alt="Instagram" width="18px" height="18px" />
+							</a>
+						<?php endif; ?>
+						<?php if( $options['social_urls']['vimeo'][0] != '' ) : ?>
+							<a href="<?php echo $options['social_urls']['vimeo'][0]; ?>" target="_blank" title="Vimeo" style="text-align: center; display: inline-block; margin: 0px 8px;">
+								<img src="<?php echo $options['social_urls']['vimeo'][1]; ?>" alt="Vimeo" width="18px" height="18px" />
+							</a>
+						<?php endif; ?>
+						<?php if( $options['social_urls']['linkedin'][0] != '' ) : ?>
+							<a href="<?php echo $options['social_urls']['linkedin'][0]; ?>" target="_blank" title="LinkedIn" style="text-align: center; display: inline-block; margin: 0px 8px;">
+								<img src="<?php echo $options['social_urls']['linkedin'][1]; ?>" alt="LinkedIn" width="18px" height="18px" />
+							</a>
+						<?php endif; ?>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<?php else : ?>
 <!DOCTYPE HTML>
 <head>
-	<title>Email Signature Setup - Destiny Rescue</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Email Signature Generator</title>
 
-	<!-- Favicon Image -->
-	<link rel="icon" href="http://www.destinyrescue.org/wp-content/themes/theme-destinyrescue/favicon.png" type="image/png" />
-    <link rel="shortcut icon" href="http://www.destinyrescue.org/wp-content/themes/theme-destinyrescue/favicon.png" type="image/png" />
-
-	<!-- Stylesheets -->
 	<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 	<div class="page-header">
-		<h1><img src="http://intranet.destinyrescue.org/resources/email/signature-generator/images/dr-hand.png" alt="Handprint" width="46px" height="46px" style="margin-top:-6px" /> Email Signature Generator</h1>
+		<h1>Email Signature Generator</h1>
 	</div>
 
-	<!-- SIGNATURE DETAILS -->
-	<form id="email-signature-form" action="result.php" method="post" target="_blank" autocomplete="off">
+	<!-- EMAIL SIGNATURE DETAILS -->
+	<form id="email-signature-form" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" target="_blank" autocomplete="off">
 		<br>
-		<p>Please use the form below to create your email signature. Follow the instructions at the bottom of this page to add the signature into your email client.</p><br>
+		<p>Please use the form below to create your email signature. Follow the instructions at the bottom of this page to add the signature into your email client. The <strong>*</strong> symbol denotes a required field.</p><br>
 
-		<table class="contact-details" width="94%" cellspacing="8" style="margin: 0 auto;">
+		<table class="contact-details" width="100%" cellspacing="8" style="margin: 0 auto;">
 			<tr>
 				<td width="200px"><label for="full-name">Full Name *</label></td>
-				<td colspan="2"><input type="text" name="full-name" placeholder="Tony Kirwan" /></td>
+				<td colspan="2"><input type="text" name="full-name" /></td>
 			</tr>
 			<tr>
 				<td><label for="position">Title/Position *</label></td>
-				<td colspan="2"><input type="text" name="position" placeholder="President &amp; Founder" /></td>
+				<td colspan="2"><input type="text" name="position" /></td>
 			</tr>
-			<tr>
-				<td><label for="country">Country *</label></td>
-				<td colspan="2">
-					<select name="country">
-						<option selected disabled>-- Select a Country --</option>
-						<optgroup label="Funding Nations">
-							<option value="Australia">Australia</option>
-							<option value="New Zealand">New Zealand</option>
-							<option value="United States">United States</option>
-						</optgroup>
-						<optgroup label="Project Nations">
-							<option value="Cambodia">Cambodia</option>
-							<option value="India">India</option>
-							<option value="Loas">Loas</option>
-							<option value="Mozambique">Mozambique</option>
-							<option value="Myanmar">Myanmar</option>
-							<option value="Philippines">Philippines</option>
-							<option value="South Africa">South Africa</option>
-							<option value="Thailand-ChiangMai">Thailand (Chiang Mai)</option>
-							<option value="Thailand-ChiangRai">Thailand (Chiang Rai)</option>
-						</optgroup>
-						<optgroup label="Other Locations">
-							<option value="International">International Office</option>
-						</optgroup>
-					</select>
-				</td>
-			</tr>
-			<tr id="mailing-address-field" style="display:none;">
-				<td><label for="address">Mailing Address</label></td>
-				<td colspan="2"><input type="text" name="address" placeholder="(Optional)" /></td>
-			</tr>
+			<?php if( !$options['hide_address_field'] ) : ?>
+				<tr>
+					<td><label for="country">Country *</label></td>
+					<td colspan="2">
+						<select name="country">
+							<option selected disabled>-- Select --</option>
+							<?php foreach( $options['address_list'] as $address ) : ?>
+								<option value="<?php echo $address[0]; ?>"><?php echo $address[0]; ?></option>
+							<?php endforeach; ?>
+						</select>
+						<input name="mailing-address" type="hidden" value="" />
+					</td>
+				</tr>
+			<?php endif; ?>
 			<tr>
 				<td><label for="email">Email Address *</label></td>
 				<td colspan="2">
-					<input class="email-user" type="text" name="email" maxlength="50" placeholder="(Required)" />
-					<span class="email-domain">@destinyrescue.org</span>
+					<input class="email-user" type="text" name="email" maxlength="50" />
+					<span class="email-domain">@<?php echo $options['email_domain']; ?></span>
 				</td>
-			</tr>
-			<tr>
-				<td><label for="skype">Skype Name</label></td>
-				<td colspan="2"><input type="text" name="skype" placeholder="(Optional)" /></td>
 			</tr>
 			<tr>
 				<td><label for="primary-number">Primary Phone *</label></td>
@@ -80,7 +212,7 @@
 						<option value="Fax">Fax</option>
 					</select>
 				</td>
-				<td><input type="text" name="primary-number" placeholder="(Required)" /></td>
+				<td><input type="text" name="primary-number" /></td>
 			</tr>
 			<tr>
 				<td><label for="secondary-number">Secondary Phone</label></td>
@@ -92,64 +224,79 @@
 						<option value="Fax">Fax</option>
 					</select>
 				</td>
-				<td><input type="text" name="secondary-number" maxlength="30" placeholder="(Optional)" /></td>
+				<td><input type="text" name="secondary-number" maxlength="30" /></td>
 			</tr>
 		</table>
 
-		<!-- SIGNATURE PREVIEW -->
+		<!-- EMAIL SIGNATURE PREVIEW -->
 		<div class="signature-preview">
 			<table style="width:100%;">
 				<tr>
-					<td style="width:58%; border-right: 4px solid #f47622; padding-right: 1.5%;">
+					<td style="width:55%; border-right: 4px solid <?php echo $options['colors']['tertiary']; ?>; padding-right: 1.5%;">
 						<table width="100%">
 							<tr>
-								<td width="40px">
-									<img src="http://intranet.destinyrescue.org/resources/email/signature-generator/images/dr-hand.png" alt="Handprint" width="46px" height="46px" />
-								</td>
 								<td>
-									<h2 id="full-name" style="font:bold 16px/18px Arial, sans-serif; letter-spacing:-1px; text-transform:uppercase; color:#020202; margin:0; padding:0;">Tony Kirwan</h2>
-									<h3 id="position" style="font:bold 14px/16px Arial, sans-serif; letter-spacing:-1px; text-transform:uppercase; color:#e8722c; margin:0; padding:0;">President &amp; Founder</h3>
-									<h4 id="location" style="font:normal 11px/14px Arial, sans-serif; color:#e8722c; margin:0; padding:0 0 4px 0;">Destiny Rescue International</h4>
+									<h2 id="full-name" style="font:bold 16px/18px Arial, sans-serif; letter-spacing:-1px; text-transform:uppercase; color:<?php echo $options['colors']['primary']; ?>; margin:0; padding:0;"><?php echo $options['sample_data']['full_name']; ?></h2>
+									<h3 id="position" style="font:bold 14px/16px Arial, sans-serif; letter-spacing:-1px; text-transform:uppercase; color:<?php echo $options['colors']['secondary']; ?>; margin:0; padding:0;"><?php echo $options['sample_data']['position']; ?></h3>
+									<h4 id="location" style="font:normal 11px/14px Arial, sans-serif; color:<?php echo $options['colors']['secondary']; ?>; margin:0; padding:0 0 4px 0;">
+										<?php if( !$options['hide_address_field'] ) : ?>
+											<?php echo $options['company_name'] .' '. $options['address_list'][0][0]; ?></h4>
+										<?php endif; ?>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<address id="email-address" style="font: normal 10px/15px Arial, sans-serif; color:#020202;"></address>
-									<address id="skype-name" style="font: normal 10px/15px Arial, sans-serif; color:#020202;"></address>
-									<address id="phone-number" style="font: normal 10px/15px Arial, sans-serif; color:#020202;"></address>
-									<address id="address" style="font: normal 10px/15px Arial, sans-serif; color:#020202;">
-										PO Box 251, Muang Chiang Rai 57000, Thailand
+									<address id="email-address" style="font: normal 10px/15px Arial, sans-serif; color:<?php echo $options['colors']['primary']; ?>;">
+										<?php echo 'Email: ' . $options['sample_data']['email_address']; ?>
 									</address>
+									<address id="phone-number" style="font: normal 10px/15px Arial, sans-serif; color:<?php echo $options['colors']['primary']; ?>;">
+										<?php echo 'Phone: ' . $options['sample_data']['phone_number']; ?>
+									</address>
+									<?php if( !$options['hide_address_field'] ) : ?>
+										<address id="address" style="font: normal 10px/15px Arial, sans-serif; color:<?php echo $options['colors']['primary']; ?>">
+											<?php echo $options['address_list'][0][1]; ?>
+										</address>
+									<?php endif; ?>
 								</td>
 							</tr>
 						</table>
 					</td>
-					<td id="logo-container" style="width:42%; padding-left: 1.5%;">
+					<td id="logo-container" style="width:45%; padding-left: 1.5%;">
 						<table id="logo" width="100%">
 							<tr>
 								<td>
-									<a style="width:200px; margin:0 auto; display:block;" href="http://destinyrescue.org/" target="_blank" title="Destiny Rescue">
-										<img src="http://intranet.destinyrescue.org/resources/email/signature-generator/images/dr-logo.png" alt="Destiny Rescue" width="200px" />
+									<a style="width:200px; margin:0 auto; display:block;" href="<?php echo $options['company_url']; ?>" target="_blank" title="<?php echo $options['company_name']; ?>">
+										<img src="<?php echo $options['logo_url']; ?>" alt="<?php echo $options['company_name']; ?>" width="200px" />
 									</a>
 								</td>
 							</tr>
 							<tr>
 								<td style="text-align: center; padding-top: 8px;">
-									<a href="https://www.facebook.com/destinyrescue" target="_blank" title="Facebook" style="text-align: center; display: inline-block; margin: 0px 8px;">
-										<img src="http://intranet.destinyrescue.org/resources/email/signature-generator/images/facebook.png" alt="Facebook" width="18px" height="18px" />
-									</a>
-									<a href="https://twitter.com/destinyrescue" target="_blank" title="Twitter" style="text-align: center; display: inline-block; margin: 0px 8px;">
-										<img src="http://intranet.destinyrescue.org/resources/email/signature-generator/images/twitter.png" alt="Twitter" width="18px" height="18px" />
-									</a>
-									<a href="http://instagram.com/destiny_rescue" target="_blank" title="Instagram" style="text-align: center; display: inline-block; margin: 0px 8px;">
-										<img src="http://intranet.destinyrescue.org/resources/email/signature-generator/images/instagram.png" alt="Instagram" width="18px" height="18px" />
-									</a>
-									<a href="https://vimeo.com/destinyrescue" target="_blank" title="Vimeo" style="text-align: center; display: inline-block; margin: 0px 8px;">
-										<img src="http://intranet.destinyrescue.org/resources/email/signature-generator/images/vimeo.png" alt="Vimeo" width="18px" height="18px" />
-									</a>
-									<a href="http://www.linkedin.com/company/destiny-rescue" target="_blank" title="LinkedIn" style="text-align: center; display: inline-block; margin: 0px 8px;">
-										<img src="http://intranet.destinyrescue.org/resources/email/signature-generator/images/linkedin.png" alt="LinkedIn" width="18px" height="18px" />
-									</a>
+									<?php if( $options['social_urls']['facebook'][0] != '' ) : ?>
+										<a href="<?php echo $options['social_urls']['facebook'][0]; ?>" target="_blank" title="Facebook" style="text-align: center; display: inline-block; margin: 0px 8px;">
+											<img src="<?php echo $options['social_urls']['facebook'][1]; ?>" alt="Facebook" width="18px" height="18px" />
+										</a>
+									<?php endif; ?>
+									<?php if( $options['social_urls']['twitter'][0] != '' ) : ?>
+										<a href="<?php echo $options['social_urls']['twitter'][0]; ?>" target="_blank" title="Twitter" style="text-align: center; display: inline-block; margin: 0px 8px;">
+											<img src="<?php echo $options['social_urls']['twitter'][1]; ?>" alt="Twitter" width="18px" height="18px" />
+										</a>
+									<?php endif; ?>
+									<?php if( $options['social_urls']['instagram'][0] != '' ) : ?>
+										<a href="<?php echo $options['social_urls']['instagram'][0]; ?>" target="_blank" title="Instagram" style="text-align: center; display: inline-block; margin: 0px 8px;">
+											<img src="<?php echo $options['social_urls']['instagram'][1]; ?>" alt="Instagram" width="18px" height="18px" />
+										</a>
+									<?php endif; ?>
+									<?php if( $options['social_urls']['vimeo'][0] != '' ) : ?>
+										<a href="<?php echo $options['social_urls']['vimeo'][0]; ?>" target="_blank" title="Vimeo" style="text-align: center; display: inline-block; margin: 0px 8px;">
+											<img src="<?php echo $options['social_urls']['vimeo'][1]; ?>" alt="Vimeo" width="18px" height="18px" />
+										</a>
+									<?php endif; ?>
+									<?php if( $options['social_urls']['linkedin'][0] != '' ) : ?>
+										<a href="<?php echo $options['social_urls']['linkedin'][0]; ?>" target="_blank" title="LinkedIn" style="text-align: center; display: inline-block; margin: 0px 8px;">
+											<img src="<?php echo $options['social_urls']['linkedin'][1]; ?>" alt="LinkedIn" width="18px" height="18px" />
+										</a>
+									<?php endif; ?>
 								</td>
 							</tr>
 						</table>
@@ -188,50 +335,16 @@
 <script>
 	$(function(){
 
-		$('input[name="full-name"]').keyup(function(){
-			var full_name = $('input[name="full-name"]').val();
-			var position = $('input[name="position"]').val();
-
-			if(full_name != ''){
-				$('#full-name').text(full_name);
-			}
-			else{
-				$('#full-name').text('Tony Kirwan');
-			}
-		});
-
-		$('input[name="position"]').keyup(function(){
-			var position = $('input[name="position"]').val();
-
-			if(position != ''){
-				$('#position').text(position);
-			}
-			else{
-				$('#position').text('President & Founder');
-			}
-		});
-
-		$('select[name="country"], select[name="primary-number-type"], select[name="secondary-number-type"]').change(function(){
-			input_field_callback();
-		});
-
-		$('input[name="address"], input[name="email"], input[name="skype"]').keyup(function(){
-			input_field_callback();
-			vertical_align_logo();
-		});
-
-		$('input[name="primary-number"], input[name="secondary-number"]').keyup(function(){
-			input_field_callback();
-		});
-
 		//FORM SUBMISSION
 		$('#email-signature-form').submit(function(){
 			var full_name = $('#email-signature-form input[name="full-name"]').val();
 			var position = $('#email-signature-form input[name="position"]').val();
-			var country = $('#email-signature-form select[name="country"]').val();
-			var mailing_address = $('#email-signature-form select[name="address"]').val();
-			var email_address = $('#email-signature-form input[name="email"]').val();
 
+			<?php if( !$options['hide_address_field'] ) : ?>
+			var country = $('#email-signature-form select[name="country"]').val();
+			<?php endif; ?>
+
+			var email_address = $('#email-signature-form input[name="email"]').val();
 			var primary_number_prefix = $('#email-signature-form select[name="primary-number-type"]').val();
 			var primary_number = $('#email-signature-form input[name="primary-number"]').val();
 			var secondary_number_prefix = $('#email-signature-form select[name="secondary-number-type"]').val();
@@ -275,107 +388,65 @@
 			}
 		});
 
+		// SIGNATURE PREVIEW LISTENER
+		$('input[name="full-name"], input[name="position"], input[name="address"], input[name="email"], input[name="primary-number"], input[name="secondary-number"]').keyup(function(){
+			input_field_callback();
+		});
+
+		$('select[name="country"], select[name="primary-number-type"], select[name="secondary-number-type"]').change(function(){
+			input_field_callback();
+		});
+
 		function input_field_callback(){
+			var full_name = $('#email-signature-form input[name="full-name"]').val();
+			var position = $('#email-signature-form input[name="position"]').val();
+			
+			<?php if( !$options['hide_address_field'] ) : ?>
 			var country = $('#email-signature-form select[name="country"]').val();
-			var mailing_address = $('#email-signature-form input[name="address"]').val();
+			<?php endif; ?>
+
 			var email_address = $('#email-signature-form input[name="email"]').val();
-			var skype_name = $('#email-signature-form input[name="skype"]').val();
 			var primary_number_prefix = $('#email-signature-form select[name="primary-number-type"]').val();
 			var primary_number = $('#email-signature-form input[name="primary-number"]').val();
 			var secondary_number_prefix = $('#email-signature-form select[name="secondary-number-type"]').val();
 			var secondary_number = $('#email-signature-form input[name="secondary-number"]').val();
 
-			if(country == 'International' || country == '' || country == null){
-				office_name = 'Destiny Rescue International';
-				$('#email-signature-form #mailing-address-field').hide();
-				$('#location').text(office_name);
-				mailing_address = 'PO Box 251, Muang Chiang Rai 57000, Thailand';
-			}
-			else if(country == 'Thailand-ChiangMai'){
-				office_name = 'Destiny Rescue Thailand';
-				$('#email-signature-form #mailing-address-field').hide();
-				$('#location').text(office_name);
-				mailing_address = '360/38-39 Moo 1 Sansai Noi, Sansai Chiang Mai, Thailand';
-			}
-			else if(country == 'Thailand-ChiangRai'){
-				office_name = 'Destiny Rescue Thailand';
-				$('#email-signature-form #mailing-address-field').hide();
-				$('#location').text(office_name);
-				mailing_address = 'PO Box 251, Muang Chiang Rai 57000, Thailand';
-			}
-			else if(country == 'Australia'){
-				office_name = 'Destiny Rescue Australia';
-				$('#email-signature-form #mailing-address-field').hide();
-				$('#location').text(office_name);
-				mailing_address = '5/23 Premier Circuit Warana, QLD 4575 Australia';
-			}
-			else if(country == 'New Zealand'){
-				office_name = 'Destiny Rescue New Zealand';
-				$('#email-signature-form #mailing-address-field').hide();
-				$('#location').text(office_name);
-				mailing_address = 'PO Box 34085, Birkenhead, Auckland, 0746 New Zealand';
-			}
-			else if(country == 'United States'){
-				office_name = 'Destiny Rescue USA';
-				$('#email-signature-form #mailing-address-field').hide();
-				$('#location').text(office_name);
-				mailing_address = 'PO Box 752, North Webster Indiana 46555 USA';
-			}
-			else if(country == 'Cambodia'){
-				office_name = 'Destiny Rescue Cambodia';
-				$('#email-signature-form #mailing-address-field').show();
-				$('#location').text(office_name);
-			}
-			else if(country == 'India'){
-				office_name = 'Destiny Rescue India';
-				$('#email-signature-form #mailing-address-field').show();
-				$('#location').text(office_name);
-			}
-			else if(country == 'Loas'){
-				office_name = 'Destiny Rescue Loas';
-				$('#email-signature-form #mailing-address-field').show();
-				$('#location').text(office_name);
-			}
-			else if(country == 'Mozambique'){
-				office_name = 'Destiny Rescue Mozambique';
-				$('#email-signature-form #mailing-address-field').show();
-				$('#location').text(office_name);
-			}
-			else if(country == 'Myanmar'){
-				office_name = 'Destiny Rescue Myanmar';
-				$('#email-signature-form #mailing-address-field').show();
-				$('#location').text(office_name);
-			}
-			else if(country == 'Philippines'){
-				office_name = 'Destiny Rescue Philippines';
-				$('#email-signature-form #mailing-address-field').show();
-				$('#location').text(office_name);
-			}
-			else if(country == 'South Africa'){
-				office_name = 'Destiny Rescue South Africa';
-				$('#email-signature-form #mailing-address-field').show();
-				$('#location').text(office_name);
-			}
+			var email_domain = '<?php echo $options['email_domain']; ?>';
 
-			if(mailing_address != ''){
-				$('#address').text(mailing_address);
+			if(full_name != ''){
+				$('#full-name').text(full_name);
 			}
 			else{
-				$('#address').text('');
+				$('#full-name').text('<?php echo $options['sample_data']['full_name']; ?>');
 			}
+
+			if(position != ''){
+				$('#position').text(position);
+			}
+			else{
+				$('#position').text('<?php echo $options['sample_data']['position']; ?>');
+			}
+
+			<?php if( !$options['hide_address_field'] ) : ?>
+				<?php foreach( $options['address_list'] as $address ) : ?>
+
+					if(country == '<?php echo $address[0]; ?>'){
+						office_name = '<?php echo $options["company_name"]; ?> <?php echo $address[0]; ?>';
+						$('#location').text(office_name);
+						mailing_address = '<?php echo $address[1]; ?>';
+						$('#address').text(mailing_address);
+						$('#email-signature-form input[name="mailing-address"]').val(mailing_address);
+					}
+
+				<?php endforeach; ?>
+			<?php endif; ?>
+
 
 			if(email_address != ''){
-				$('#email-address').html('Email: <a href="mailto:' + email_address + '@destinyrescue.org" target="_blank">' + email_address + '@destinyrescue.org</a>');
+				$('#email-address').html('Email: <a href="mailto:' + email_address + '@'+ email_domain +'" target="_blank">' + email_address + '@'+ email_domain +'</a>');
 			}
 			else{
-				$('#email-address').html('');
-			}
-			
-			if(skype_name != ''){
-				$('#skype-name').html('Skype: <a href="skype:' + skype_name + '?userinfo">' + skype_name + '</a>');
-			}
-			else{
-				$('#skype-name').html('');
+				$('#email-address').html('<?php echo "Email: " . $options["sample_data"]["email_address"]; ?>');
 			}
 
 			if(primary_number != ''){
@@ -386,17 +457,11 @@
 					$('#phone-number').text(primary_number_prefix + ': ' + primary_number);
 				}
 			}
+			else{
+				$('#phone-number').html('<?php echo "Phone: " . $options["sample_data"]["phone_number"]; ?>');
+			}
 		}
-
-		function vertical_align_logo(){
-			var outer_height = $('#logo-container').height();
-			var inner_height = $('#logo').height();
-
-			var margin_top = (outer_height - inner_height) / 3;
-			$('#logo').css('margin-top', margin_top);
-		}
-
 	});
 </script>
-
 </html>
+<?php endif; ?>

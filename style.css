@@ -1,4 +1,17 @@
-@import url('css/fonts.css');
+@import url('http://fonts.googleapis.com/css?family=Oxygen:400,700');
+
+@font-face {
+    font-family: 'LeagueGothicRegular';
+    src: url('fonts/LeagueGothic-Regular-webfont.eot');
+    src: url('fonts/LeagueGothic-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/LeagueGothic-Regular-webfont.woff') format('woff'),
+         url('fonts/LeagueGothic-Regular-webfont.ttf') format('truetype'),
+         url('fonts/LeagueGothic-Regular-webfont.svg#LeagueGothicRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ========================= */
 
 *{ margin: 0; padding: 0; border: none; vertical-align: top; }
 
@@ -9,11 +22,14 @@ body{ font: normal 12px/18px Arial, sans-serif; background: #f3f3f3; color: #888
 a{ color: #444; text-decoration: none; }
 a:hover{ text-decoration: underline; }
 
+strong { font-weight: bold; }
+
 h1{
 	width: 600px;
-	font: normal 42px/42px LeagueGothicRegular, Arial, sans-serif;
+	font: normal 42px/42px 'LeagueGothicRegular', Arial, sans-serif;
 	color: #fff;
 	text-transform: uppercase;
+	-webkit-font-smoothing: antialiased;
 	margin: 0 auto;
 }
 
@@ -68,7 +84,10 @@ form select{
 	-mox-border-radius: 0;
 	border-radius: 0;
 	margin: 7px 0;
-	padding: 5px 1.25%;
+	padding: 6px 26px 5px 16px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 form select:focus{
@@ -77,19 +96,23 @@ form select:focus{
 }
 
 form input[type="text"]{
-	width: 96%;
+	width: 100%;
 	font: normal 16px/16px Arial, sans-serif; 
 	color: #aaa;
 	background: #fff;
 	border: 1px solid #ccc;
 	margin: 7px 0;
-	padding: 6px 2%;
+	padding: 6px 14px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 form input[type="submit"]{
-	font: normal 24px/38px LeagueGothicRegular, Arial, sans-serif; 
+	font: normal 24px/38px 'LeagueGothicRegular', Arial, sans-serif; 
 	color: #fff;
 	text-transform: uppercase;
+	-webkit-font-smoothing: antialiased;
 	background: #444;
 	padding: 3px 6.5% 0;
 	float: right;
@@ -116,7 +139,7 @@ form input[type="text"]:focus{
 
 .page-header{
 	background: #111 url(images/header_bg.jpg) repeat top left;
-	border-bottom: 4px solid #d5641c;
+	border-bottom: 4px solid #a7a7a7;
 	box-shadow: inset 1px 0px 14px #000;
 	padding: 56px 0 30px;
 }
@@ -147,9 +170,10 @@ form input[type="text"]:focus{
 
 .client-links li a{
 	width: 100%;
-	font: normal 20px/34px LeagueGothicRegular, Arial, sans-serif; 
+	font: normal 20px/34px 'LeagueGothicRegular', Arial, sans-serif; 
 	color: #fff;
 	text-transform: uppercase;
+	-webkit-font-smoothing: antialiased;
 	background: #777;
 	display: block;
 	padding-top: 2px;

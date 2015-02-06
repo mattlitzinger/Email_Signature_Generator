@@ -2,9 +2,7 @@
 	$full_name = $_POST['full-name'];
 	$position = $_POST['position'];
 	$country = $_POST['country'];
-	$mailing_address = $_POST['address'];
 	$email_address = $_POST['email'];
-	$skype_name = $_POST['skype'];
 	$primary_number_prefix = $_POST['primary-number-type'];
 	$secondary_number_prefix = $_POST['secondary-number-type'];
 	$primary_number = $_POST['primary-number'];
@@ -34,34 +32,6 @@
 		$office_name = 'Destiny Rescue USA';
 		$address = 'PO Box 752, North Webster, Indiana 46555 USA';
 	}
-	else if($country == 'Cambodia'){
-		$office_name = 'Destiny Rescue Cambodia';
-		$address = $mailing_address;
-	}
-	else if($country == 'India'){
-		$office_name = 'Destiny Rescue India';
-		$address = $mailing_address;
-	}
-	else if($country == 'Loas'){
-		$office_name = 'Destiny Rescue Loas';
-		$address = $mailing_address;
-	}
-	else if($country == 'Mozambique'){
-		$office_name = 'Destiny Rescue Mozambique';
-		$address = $mailing_address;
-	}
-	else if($country == 'Myanmar'){
-		$office_name = 'Destiny Rescue Myanmar';
-		$address = $mailing_address;
-	}
-	else if($country == 'Philippines'){
-		$office_name = 'Destiny Rescue Philippines';
-		$address = $mailing_address;
-	}
-	else if($country == 'South Africa'){
-		$office_name = 'Destiny Rescue South Africa';
-		$address = $mailing_address;
-	}
 ?>
 
 <!-- Final Signature -->
@@ -85,14 +55,6 @@
 							<?php
 								if($email_address != ''){
 									$print = 'Email: <a href="mailto:'.$email_address.'@destinyrescue.org" target="_blank" style="color:#020202; text-decoration:none;">'.$email_address.'@destinyrescue.org</a>';
-									echo $print;
-								}
-							?>
-						</address>
-						<address id="skype-name" style="font: normal 10px/15px Arial, sans-serif; color:#020202;">
-							<?php
-								if($skype_name != ''){
-									$print = 'Skype: <a href="skype:'.$skype_name.'?userinfo" style="color:#020202; text-decoration:none;">'.$skype_name.'</a>';
 									echo $print;
 								}
 							?>
