@@ -331,7 +331,6 @@
 
 <!-- JavaScript Files Go Here -->
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="js/placeholders.js" type="text/javascript"></script>
 <script>
 	$(function(){
 
