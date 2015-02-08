@@ -1,21 +1,15 @@
-@import url('http://fonts.googleapis.com/css?family=Oxygen:400,700');
-
-@font-face {
-    font-family: 'LeagueGothicRegular';
-    src: url('fonts/LeagueGothic-Regular-webfont.eot');
-    src: url('fonts/LeagueGothic-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/LeagueGothic-Regular-webfont.woff') format('woff'),
-         url('fonts/LeagueGothic-Regular-webfont.ttf') format('truetype'),
-         url('fonts/LeagueGothic-Regular-webfont.svg#LeagueGothicRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 /* ========================= */
 
 *{ margin: 0; padding: 0; border: none; vertical-align: top; }
 
-body{ font: normal 12px/18px Arial, sans-serif; background: #f3f3f3; color: #888; }
+body{ 
+	font: normal 13px/20px 'Lato', Arial, sans-serif; 
+	background: #f3f3f3; 
+	color: #888;
+	-webkit-font-smoothing: antialiased;
+}
 
 /* ========================= */
 
@@ -26,10 +20,10 @@ strong { font-weight: bold; }
 
 h1{
 	width: 600px;
-	font: normal 42px/42px 'LeagueGothicRegular', Arial, sans-serif;
+	font: 300 42px/1 'Lato', Arial, sans-serif;
 	color: #fff;
-	text-transform: uppercase;
-	-webkit-font-smoothing: antialiased;
+	letter-spacing: -1px;
+	/*text-transform: uppercase;*/
 	margin: 0 auto;
 }
 
@@ -57,7 +51,7 @@ ol li{
 }
 
 .contact-details .email-domain{
-	font: normal 16px/16px Arial, sans-serif;
+	font: normal 16px/16px 'Lato', Arial, sans-serif;
 	display: inline-block;
 	margin-top: 14px;
 	vertical-align: middle;
@@ -70,13 +64,13 @@ form{
 }
 
 form label{
-	font: bold 14px/14px Arial, sans-serif;
+	font: bold 14px/14px 'Lato', Arial, sans-serif;
 	color: #888;
 }
 
 form select{
 	width: 100%;
-	font: normal 16px/19px Arial, sans-serif;
+	font: normal 16px/19px 'Lato', Arial, sans-serif;
 	color: #aaa;
 	background: #fff url('images/select-arrow.png') 97.5% center no-repeat;
 	border: 1px solid #ccc;
@@ -97,7 +91,7 @@ form select:focus{
 
 form input[type="text"]{
 	width: 100%;
-	font: normal 16px/16px Arial, sans-serif; 
+	font: normal 16px/1 'Lato', Arial, sans-serif; 
 	color: #aaa;
 	background: #fff;
 	border: 1px solid #ccc;
@@ -109,12 +103,13 @@ form input[type="text"]{
 }
 
 form input[type="submit"]{
-	font: normal 24px/38px 'LeagueGothicRegular', Arial, sans-serif; 
+	font: 300 20px/1 'Lato', Arial, sans-serif; 
 	color: #fff;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
+	letter-spacing: -1px;
 	-webkit-font-smoothing: antialiased;
 	background: #444;
-	padding: 3px 6.5% 0;
+	padding: 12px 16px 14px;
 	float: right;
 	cursor: pointer;
 }
@@ -170,13 +165,14 @@ form input[type="text"]:focus{
 
 .client-links li a{
 	width: 100%;
-	font: normal 20px/34px 'LeagueGothicRegular', Arial, sans-serif; 
+	font: 300 20px/1 'Lato', Arial, sans-serif; 
 	color: #fff;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
+	letter-spacing: -1px;
 	-webkit-font-smoothing: antialiased;
 	background: #777;
 	display: block;
-	padding-top: 2px;
+	padding: 7px 0 9px;
 	cursor: pointer;
 }
 
